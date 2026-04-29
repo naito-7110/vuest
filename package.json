@@ -2,10 +2,15 @@
   "name": "vuest",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build": "turbo build",
+    "playground:dev": "turbo --filter playground dev"
+  },
   "devDependencies": {
     "@types/node": "^25.6.0",
     "@vue/typescript-plugin": "^3.2.7",
-    "oxfmt": "^0.46.0"
+    "oxfmt": "^0.46.0",
+    "turbo": "^2.9.6"
   },
   "packageManager": "pnpm@10.33.2"
 }
