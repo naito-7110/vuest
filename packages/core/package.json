@@ -1,0 +1,25 @@
+{
+  "name": "@vuest/core",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "naito-7110 <shige.7110.330@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/naito-7110/vuest",
+    "directory": "packages/core"
+  },
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "rolldown -c rolldown.config.ts"
+  },
+  "dependencies": {
+    "vue": "^3.5.33"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.6",
+    "rolldown": "1.0.0-rc.16"
+  },
+  "packageManager": "pnpm@10.33.2",
+  "licence": "MIT"
+}

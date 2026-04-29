@@ -16,6 +16,7 @@
           pnpm
           vscode-langservers-extracted
           typescript-language-server
+          vue-language-server
         ];
 
         shellHook = ''
