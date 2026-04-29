@@ -2,5 +2,8 @@
   "name": "vuest",
   "private": true,
   "type": "module",
+  "devDependencies": {
+    "oxfmt": "^0.46.0"
+  },
   "packageManager": "pnpm@10.33.2"
 }
