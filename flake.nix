@@ -1,5 +1,5 @@
 {
-  description = "Node 25 devShell";
+  description = "Node 24 devShell";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
