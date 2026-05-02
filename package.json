@@ -5,7 +5,8 @@
   "scripts": {
     "build": "turbo build",
     "playground:dev": "turbo --filter playground dev",
-    "test:unit": "vitest --project unit --watch=false"
+    "test:unit": "vitest --project unit --watch=false",
+    "fmt": "oxfmt -c oxfmt.config.ts packages/**/*.{ts,vue,tsx,json,tsx,md,mdx}"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
