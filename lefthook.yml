@@ -1,0 +1,25 @@
+pre-commit:
+  parallel: true
+  commands:
+    textlint:
+      glob: "*"
+      run: typos -c typos.toml
+      stage_fixed: true
+      skip:
+        - merge
+        - rebase
+    fmt:
+      glob: "*"
+      run: pnpm fmt
+      stage_fixed: true
+      skip:
+        - merge
+        - rebase
+    test-unit:
+      glob: "*.{ts,tsx,vue,js,jsx}"
+      run: |
+        pnpm test:unit
+      stage_fixed: true
+      skip:
+        - merge
+        - rebase

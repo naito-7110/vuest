@@ -18,6 +18,7 @@
           typescript-language-server
           vue-language-server
           typos
+          lefthook
         ];
 
         shellHook = ''
