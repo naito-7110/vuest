@@ -12,7 +12,7 @@ export default function defineContext<ContextValue>(name: string) {
   function useContext<T extends ContextValue>(fallback?: T) {
     const ctx = inject(injectionKey, fallback)
 
-    if (!ctx) {
+    if (ctx === undefined || ctx === null) {
       throw new Error(`${contextName} was not found.`)
     }
 
