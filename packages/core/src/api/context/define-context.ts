@@ -9,7 +9,9 @@ export default function defineContext<ContextValue>(name: string) {
     provide(injectionKey, contextValue)
   }
 
-  function useContext<T extends ContextValue>(fallback?: T) {
+  function useContext(): ContextValue
+  function useContext(fallback: ContextValue): ContextValue
+  function useContext(fallback?: ContextValue) {
     const ctx = inject(injectionKey, fallback)
 
     if (ctx === undefined || ctx === null) {
