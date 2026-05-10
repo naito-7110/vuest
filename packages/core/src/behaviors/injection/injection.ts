@@ -42,7 +42,7 @@ const Injection = defineComponent({
       const omitedRefProps = omitRef(injectionTarget.props)
       const mergedProps = omitedRefProps ? mergeProps(attrs, omitedRefProps) : attrs
 
-      const cloned = cloneVNode({ ...injectionTarget, props: {} }, mergedProps)
+      const cloned = cloneVNode(injectionTarget, mergedProps, true)
 
       if (children.length === 1) return cloned
 
