@@ -39,8 +39,8 @@ const Injection = defineComponent({
       if (firstNonCommentChildIndex === -1) return children
 
       const injectionTarget = children[firstNonCommentChildIndex]
-      const omitedRefProps = omitRef(injectionTarget.props)
-      const mergedProps = omitedRefProps ? mergeProps(attrs, omitedRefProps) : attrs
+      const omittedRefProps = omitRef(injectionTarget.props)
+      const mergedProps = omittedRefProps ? mergeProps(attrs, omittedRefProps) : attrs
 
       const cloned = cloneVNode(injectionTarget, mergedProps, true)
 
