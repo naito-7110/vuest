@@ -17,6 +17,7 @@
           vscode-langservers-extracted
           typescript-language-server
           vue-language-server
+          typos
         ];
 
         shellHook = ''
