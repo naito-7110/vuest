@@ -3,7 +3,7 @@ import type { InjectionKey } from 'vue'
 
 export default function defineContext<ContextValue>(name: string) {
   const contextName = `${name}Context`
-  const injectionKey: InjectionKey<ContextValue | null> = Symbol(contextName)
+  const injectionKey: InjectionKey<ContextValue> = Symbol(contextName)
 
   function provideContext(contextValue: ContextValue) {
     provide(injectionKey, contextValue)
