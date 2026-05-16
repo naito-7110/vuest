@@ -2,7 +2,6 @@ import { describe, test, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
 import defineContext from './define-context'
-import { expectFailure } from 'node:test'
 
 describe('@vuest/core#define-context', async () => {
   type ContextValue = {
