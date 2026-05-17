@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "@vue/test-utils": "^2.4.6",
     "@vue/typescript-plugin": "^3.2.7",
     "happy-dom": "^20.9.0",
     "oxfmt": "^0.46.0",
