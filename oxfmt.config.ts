@@ -14,6 +14,6 @@ export default defineConfig({
   insertFinalNewline: true,
 
   vueIndentScriptAndStyle: false,
-  singleAttributePerLine: false,
+  singleAttributePerLine: true,
   htmlWhitespaceSensitivity: 'css',
 })
