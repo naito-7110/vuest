@@ -7,7 +7,8 @@
     "playground:dev": "turbo --filter playground dev",
     "test:unit": "vitest --project unit --watch=false",
     "fmt": "oxfmt -c oxfmt.config.ts packages/**/*.{ts,vue,tsx,json,tsx,md,mdx}",
-    "fmt:check": "oxfmt --check oxfmt.config.ts packages/**/*.{ts,vue,tsx,json,tsx,md,mdx}"
+    "fmt:check": "oxfmt --check oxfmt.config.ts packages/**/*.{ts,vue,tsx,json,tsx,md,mdx}",
+    "lint": "oxlint -c oxlint.config.ts"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",

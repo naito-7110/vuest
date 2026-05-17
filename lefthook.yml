@@ -15,6 +15,12 @@ pre-commit:
       skip:
         - merge
         - rebase
+    lint:
+      glob: "*.{ts,tsx,vue,js,jsx}"
+      run: pnpm lint
+      skip:
+        - merge
+        - rebase
     test-unit:
       glob: "*.{ts,tsx,vue,js,jsx}"
       run: |
