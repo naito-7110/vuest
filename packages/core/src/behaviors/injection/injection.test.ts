@@ -6,7 +6,7 @@ import { Fragment, h, Comment } from 'vue'
 describe('@vuest/core#injection', async () => {
   test('should inject attrs into slot component', async () => {
     const wrapper = mount(Injection, {
-      props: {
+      attrs: {
         'dummy-props': 'ExpectedValue',
       },
       slots: {
@@ -26,7 +26,7 @@ describe('@vuest/core#injection', async () => {
 
   test('should injected attrs into the first not commented child without fragment', async () => {
     const wrapper = mount(Injection, {
-      props: {
+      attrs: {
         'expected-props': 'ExpectedValue',
       },
       slots: {
@@ -57,7 +57,7 @@ describe('@vuest/core#injection', async () => {
 
   test('should override Injection props with props directly assigned to the child component', async () => {
     const wrapper = mount(Injection, {
-      props: {
+      attrs: {
         'samename-props': 'Injection',
       },
       slots: {
