@@ -20,5 +20,12 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "rolldown.config.ts", "env.d.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "rolldown.config.ts",
+    "env.d.ts",
+    "vitest.config.ts"
+  ]
 }
