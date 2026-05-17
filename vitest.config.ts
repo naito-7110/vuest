@@ -1,4 +1,3 @@
-import { watch } from 'node:fs'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
