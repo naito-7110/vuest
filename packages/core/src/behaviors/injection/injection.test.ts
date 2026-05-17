@@ -32,11 +32,12 @@ describe('@vuest/core#injection', async () => {
       slots: {
         default: () => [
           h(Comment, 'comment1'),
-          h(Fragment),
-          h(Comment, 'comment2'),
-          h('div', {
-            'data-testid': 'injection-target',
-          }),
+          h(Fragment, null, [
+            h(Comment, 'comment2'),
+            h('div', {
+              'data-testid': 'injection-target',
+            }),
+          ]),
         ],
       },
     })
