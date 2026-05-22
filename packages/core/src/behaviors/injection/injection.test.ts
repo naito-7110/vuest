@@ -72,4 +72,35 @@ describe('@vuest/core#injection', async () => {
     const child = wrapper.find('[data-testid="injection-target"]')
     expect(child.attributes('samename-props')).toEqual('Child')
   })
+
+  test('should pass porps through nested Injection components', async () => {
+    const wrapper = mount(Injection, {
+      attrs: {
+        'parent-injection-props': 'ParentInjection',
+      },
+      slots: {
+        default: () => [
+          h(
+            Injection,
+            {
+              'child-injection-props': 'ChildInjection',
+            },
+            [
+              h('div', {
+                'data-testid': 'injection-target',
+              }),
+            ],
+          ),
+        ],
+      },
+    })
+
+    const child = wrapper.find('[data-testid="injection-target"]')
+
+    expect(child.exists()).toBe(true)
+    expect(child.attributes('parent-injection-props')).not.toBeUndefined()
+    expect(child.attributes('parent-injection-props')).toBe('ParentInjection')
+    expect(child.attributes('child-injection-props')).not.toBeUndefined()
+    expect(child.attributes('child-injection-props')).toBe('ChildInjection')
+  })
 })
