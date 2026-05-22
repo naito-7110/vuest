@@ -24,7 +24,7 @@ describe('@vuest/core#injection', async () => {
     expect(child.attributes('dummy-props')).toEqual('ExpectedValue')
   })
 
-  test('should injected attrs into the first not commented child without fragment', async () => {
+  test('should inject attrs into the first not commented child without fragment', async () => {
     const wrapper = mount(Injection, {
       attrs: {
         'expected-props': 'ExpectedValue',
