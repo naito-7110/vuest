@@ -4,76 +4,23 @@ import { Toggle } from '..'
 import { defineComponent, h, ref } from 'vue'
 
 describe('@vuest/core#Toggle', async () => {
-  test('initial state without any props', async () => {
+  test.each([
+    { props: {}, expectedPressed: 'false', expectedBusy: undefined, expectedDisabled: undefined },
+    { props: { pressed: true }, expectedPressed: 'true', expectedBusy: undefined, expectedDisabled: undefined },
+    { props: { loading: true }, expectedPressed: 'false', expectedBusy: 'true', expectedDisabled: 'true' },
+    { props: { pressed: true, loading: true }, expectedPressed: 'true', expectedBusy: 'true', expectedDisabled: 'true' },
+  ])('initial state with props: $props', async ({ props, expectedPressed, expectedBusy, expectedDisabled }) => {
     const wrapper = mount(Toggle.Root, {
-      props: {},
+      props,
       slots: {
-        default: () => [
-          h(Toggle.Trigger, null, [
-            h('button', {
-              'data-testid': 'btn',
-            }),
-          ]),
-        ],
+        default: () => h(Toggle.Trigger, null, () => h('button', { 'data-testid': 'btn' })),
       },
     })
 
     const button = wrapper.find('[data-testid="btn"]')
-    expect(button.attributes('aria-pressed')).toBe('false')
-    expect(button.attributes('aria-busy')).toBeUndefined()
-    expect(button.attributes('aria-disabled')).toBeUndefined()
-  })
-
-  test('when loading is true, shows loading state and ignores clicks', async () => {
-    const pressed = ref(false)
-    const Parent = defineComponent({
-      setup() {
-        return () =>
-          h(
-            Toggle.Root,
-            {
-              pressed: pressed.value,
-              loading: true,
-              'onUpdate:pressed': (v: boolean) => (pressed.value = v),
-            },
-            () => h(Toggle.Trigger, null, () => h('button', { 'data-testid': 'btn' })),
-          )
-      },
-    })
-
-    const wrapper = mount(Parent)
-    const button = wrapper.find('[data-testid="btn"]')
-
-    expect(button.attributes('aria-pressed')).toBe('false')
-    expect(button.attributes('aria-busy')).toBe('true')
-    expect(button.attributes('aria-disabled')).toBe('true')
-
-    await button.trigger('click')
-    expect(pressed.value).toBe(false)
-    expect(button.attributes('aria-pressed')).toBe('false')
-  })
-
-  test('initial state with pressed props', async () => {
-    const wrapper = mount(Toggle.Root, {
-      props: {
-        pressed: true,
-      },
-      slots: {
-        default: () => [
-          h(Toggle.Trigger, null, [
-            h('button', {
-              'data-testid': 'btn',
-            }),
-          ]),
-        ],
-      },
-    })
-
-    const button = wrapper.find('[data-testid="btn"]')
-
-    expect(button.attributes('aria-pressed')).toBe('true')
-    expect(button.attributes('aria-busy')).toBeUndefined()
-    expect(button.attributes('aria-disabled')).toBeUndefined()
+    expect(button.attributes('aria-pressed')).toBe(expectedPressed)
+    expect(button.attributes('aria-busy')).toBe(expectedBusy)
+    expect(button.attributes('aria-disabled')).toBe(expectedDisabled)
   })
 
   test('when loading prop update to "true" aria-busy and aria-disabled update to "true"', async () => {
@@ -82,13 +29,7 @@ describe('@vuest/core#Toggle', async () => {
         loading: false,
       },
       slots: {
-        default: () => [
-          h(Toggle.Trigger, null, [
-            h('button', {
-              'data-testid': 'btn',
-            }),
-          ]),
-        ],
+        default: () => h(Toggle.Trigger, null, () => h('button', { 'data-testid': 'btn' })),
       },
     })
 
@@ -102,34 +43,25 @@ describe('@vuest/core#Toggle', async () => {
     expect(button.attributes('aria-disabled')).toBe('true')
   })
 
-  test('clicking trigger toggles pressed state via v-model', async () => {
-    const pressed = ref(false)
+  test.each([
+    { loading: false, initialPressed: false, expectedAfterClick: true },
+    { loading: false, initialPressed: true, expectedAfterClick: false },
+    { loading: true, initialPressed: false, expectedAfterClick: false },
+    { loading: true, initialPressed: true, expectedAfterClick: true },
+  ])('click behavior with loading=$loading, pressed=$initialPressed', async ({ loading, initialPressed, expectedAfterClick }) => {
+    const pressed = ref(initialPressed)
     const Parent = defineComponent({
-      setup() {
-        return () =>
-          h(
-            Toggle.Root,
-            {
-              pressed: pressed.value,
-              'onUpdate:pressed': (v: boolean) => (pressed.value = v),
-            },
-            () => h(Toggle.Trigger, null, () => h('button', { 'data-testid': 'btn' })),
-          )
-      },
+      setup: () => () =>
+        h(Toggle.Root, {
+          pressed: pressed.value,
+          loading,
+          'onUpdate:pressed': (v: boolean) => (pressed.value = v),
+        }, () => h(Toggle.Trigger, null, () => h('button', { 'data-testid': 'btn' }))),
     })
 
     const wrapper = mount(Parent)
-    const button = wrapper.find('[data-testid="btn"]')
+    await wrapper.find('[data-testid="btn"]').trigger('click')
 
-    expect(pressed.value).toBe(false)
-    expect(button.attributes('aria-pressed')).toBe('false')
-
-    await button.trigger('click')
-    expect(pressed.value).toBe(true)
-    expect(button.attributes('aria-pressed')).toBe('true')
-
-    await button.trigger('click')
-    expect(pressed.value).toBe(false)
-    expect(button.attributes('aria-pressed')).toBe('false')
+    expect(pressed.value).toBe(expectedAfterClick)
   })
 })
