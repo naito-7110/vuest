@@ -64,4 +64,28 @@ describe('@vuest/core#Toggle', async () => {
 
     expect(pressed.value).toBe(expectedAfterClick)
   })
+
+  test('works correctly when other elements are nested between Root and Trigger', async () => {
+    const pressed = ref(false)
+    const Parent = defineComponent({
+      setup: () => () =>
+        h(Toggle.Root, {
+          pressed: pressed.value,
+          'onUpdate:pressed': (v: boolean) => (pressed.value = v),
+        }, () => h('div', { class: 'wrapper' }, [
+          h('span', 'label'),
+          h(Toggle.Trigger, null, () => h('button', { 'data-testid': 'btn' })),
+        ])),
+    })
+
+    const wrapper = mount(Parent)
+    const button = wrapper.find('[data-testid="btn"]')
+
+    expect(button.attributes('aria-pressed')).toBe('false')
+
+    await button.trigger('click')
+
+    expect(pressed.value).toBe(true)
+    expect(button.attributes('aria-pressed')).toBe('true')
+  })
 })
