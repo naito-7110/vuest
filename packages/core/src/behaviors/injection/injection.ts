@@ -1,19 +1,5 @@
-import { Fragment, Comment, cloneVNode, defineComponent, mergeProps } from 'vue'
-import type { VNode } from 'vue'
-
-function flattenVNodes(children: VNode[]): VNode[] {
-  if (!children) return []
-
-  return children.flatMap((child) => {
-    if (Array.isArray(child)) return flattenVNodes(child)
-
-    if (child.type === Fragment) {
-      return flattenVNodes(child.children as VNode[])
-    }
-
-    return [child]
-  })
-}
+import { Comment, cloneVNode, defineComponent, mergeProps } from 'vue'
+import { flattenVNodes } from '../../utils'
 
 function omitRef<TProps extends Record<string, unknown> | null | undefined>(props: TProps) {
   if (!props) return props
