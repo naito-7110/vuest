@@ -3,11 +3,10 @@ import type { Ref } from 'vue'
 import { toRef } from 'vue'
 import { defineContext } from '../../api'
 
-export type ToggleRootProps = {
+interface ToggleRootProps {
   loading?: boolean
 }
-
-export type ToggleRootContext = {
+interface ToggleRootContext {
   pressed: Readonly<Ref<boolean>>
   disabled: Readonly<Ref<boolean>>
   onPressedToggle: (pressed: boolean) => void
