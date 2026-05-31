@@ -1,8 +1,9 @@
 <script lang="ts">
 import { computed, toRef, useId, useSlots, type Ref } from 'vue'
-import { Injection } from '../injection'
 import { defineContext } from '../../api'
 import { getFirstNonCommentChildElementTypeName, isHTMLTagName } from '../../utils'
+import FieldsetRoot from './radio-group-root.fieldset.vue'
+import WAIARIARoot from './radio-group-root.waiaria.vue'
 
 interface WAIARIAContext {
   isFieldsetSlot: false
@@ -78,18 +79,17 @@ provideContext(
 </script>
 
 <template>
-  <Injection
+  <FieldsetRoot
     v-if="isFieldsetSlot"
-    :aria-disabled="disabled || undefined"
+    :disabled="disabled"
   >
     <slot />
-  </Injection>
-  <Injection
+  </FieldsetRoot>
+  <WAIARIARoot
     v-else
-    role="radiogroup"
-    :aria-disabled="disabled || undefined"
-    :aria-orientation="orientation"
+    :disabled="disabled"
+    :orientation="orientation"
   >
     <slot />
-  </Injection>
+  </WAIARIARoot>
 </template>

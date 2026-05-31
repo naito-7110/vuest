@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Injection } from '../injection'
+import FieldsetItem from './radio-group-item.fieldset.vue'
+import WAIARIAItem from './radio-group-item.waiaria.vue'
 import { useRadioGroupRootContext } from './radio-group-root.vue'
 
 interface RadioGroupItemProps {
@@ -24,24 +25,26 @@ const onSelect = () => {
 </script>
 
 <template>
-  <Injection
+  <FieldsetItem
     v-if="ctx.isFieldsetSlot"
-    :checked="checked"
-    :disabled="composedDisabled || undefined"
     :value="value"
+    :checked="checked"
+    :disabled="composedDisabled"
     :name="ctx.name.value"
-    @change="onSelect"
+    @select="onSelect"
   >
-    <slot :checked="checked" />
-  </Injection>
-  <Injection
+    <template #default="slotProps">
+      <slot v-bind="slotProps" />
+    </template>
+  </FieldsetItem>
+  <WAIARIAItem
     v-else
-    role="radio"
-    :aria-checked="checked"
-    :aria-disabled="composedDisabled || undefined"
-    :tabindex="checked ? 0 : -1"
-    @click="onSelect"
+    :checked="checked"
+    :disabled="composedDisabled"
+    @select="onSelect"
   >
-    <slot :checked="checked" />
-  </Injection>
+    <template #default="slotProps">
+      <slot v-bind="slotProps" />
+    </template>
+  </WAIARIAItem>
 </template>
