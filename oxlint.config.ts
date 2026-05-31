@@ -35,8 +35,16 @@ export default defineConfig({
     {
       files: ['**/*.test.ts', '**/*.spec.ts'],
       rules: {
+        'max-lines': 'off',
         'max-lines-per-function': 'off',
         'require-await': 'off',
+      },
+    },
+    {
+      files: ['**/*.d.ts'],
+      rules: {
+        '@typescript-eslint/ban-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
       },
     },
   ],
